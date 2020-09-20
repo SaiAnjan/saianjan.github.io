@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="script/feather.min.js"></script>
+    <script src="script/siema.min.js"></script>
 </head>
 <body style="background-color: #001B45;">
     <article class="mw8 pv6 pa4 center">
@@ -80,9 +81,22 @@
             </div>
           </div>
         </div>
-        
+        <div class="siema">
+          <div>Hi</div>
+          <div>Hello</div>
+          <div>There</div>
+          <div>Suit Up</div>
+        </div>
+        <button class="prev">Previous</button>
+        <button class="next">Next</button>
         <script>
             feather.replace()
+        </script>
+
+        <script>
+          const mySiema = new Siema();
+          document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
+          document.querySelector('.next').addEventListener('click', () => mySiema.next());
         </script>
     </article>
 </body>
