@@ -6,7 +6,10 @@ h1{
     color: #001B45;
     font-weight: 800;
 }
-
+h2{
+    font-family: 'DM Sans', sans-serif;
+    color: #001B45;
+}
 .ibmplex{
     font-family: 'IBM Plex Sans', sans-serif;
 }
@@ -26,7 +29,7 @@ figcaption h3{
     font-size: 24px;
     font-weight: 600;
     line-height: 50px;
-    background: #423D4B;
+    background: #00000053;
     border-radius: 50%;
     width: 50px;
     height: 50px;
