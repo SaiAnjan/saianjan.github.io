@@ -1,6 +1,10 @@
 body {
     background-color: #153DBC;
     font-family: 'Poppins', sans-serif;
+    overflow-y: scroll;
+}
+body::-webkit-scrollbar {
+    display: none;
 }
 h1{
     color: #001B45;
