@@ -28,47 +28,53 @@
         <div>
             <h1 class="f2 lh-copy f1-ns" style="font-family: 'DM Sans', sans-serif; color: #7E58EA;">Re-Designing Live class filtering</h1>
         </div>
-        <div>
-          <div class="cf">
-            <div class="fl w-100 w-50-ns pr5-ns">
-              <p class="f4 b">Context</p>
-              <p class="f4 lh-copy">Mindhouse is an meditation app and offers 7 different courses/techniques and 4 courses have a mini version also. Each course has different types and classes are taken by different instructors. A way to think about it would be through a university analogy. Physics is the course. It could have multiple classes, with different professors, and different material being taught in each class. In total there are about 70 different classes in a single day on the app. </p>
-              <a href="https://www.mindhouse.com/courses/" target="new" style="color: #7E58EA;">Check out Mindhouse</a><i data-feather="arrow-up-right" class="blue"></i>
-            </div>
-            <div class="fl w-100 w-50-ns pr5-ns">
-              <p class="f4 b">Intro to the app</p>
-              <p class="f4 lh-copy">To understand the app, it’s a guided meditation tool(Like Headspace) but it has trainers who take live classes. I worked with Ashish Goel who leads the design at Mindhouse. Mindhouse used to have a physical studio where the classes happened but then COVID-19 struck and like all businesses Mindhouse shifted to online. So one of the primary interfaces that the app has is the Book tab. This lists down all the classes that are scheduled in a certain week which you can book and attend.</p>
-              <a href="https://apps.apple.com/in/app/mindhouse-modern-meditation/id1484471377" target="new" style="color: #7E58EA;">Check out the app</a><i data-feather="arrow-up-right" class="blue"></i>
-            </div>
-          </div>
-        </div>
+        <p class="f4 b">Context</p>
+        <p class="f4 lh-copy">Mindhouse is an meditation app and offers 7 different courses/techniques and 4 courses have a mini version also. Each course has different types and classes are taken by different instructors. A way to think about it would be through a university analogy. Physics is the course. It could have multiple classes, with different professors, and different material being taught in each class. In total there are about 70 different classes in a single day on the app. </p>
+        <a href="https://www.mindhouse.com/courses/" target="new" style="color: #7E58EA;">Check out Mindhouse</a><i data-feather="arrow-up-right" class="blue"></i>
         <p class="f2 lh-copy">"Make it easier to choose a live class for the user"</p>
-        <p class="f4 lh-copy">Because of the large number of classes, currently it is hard for a user to choose the class they are looking for. So following needed to be done:</p>
-        <div class="mw9 center">
-          <div class="cf">
-            <div class="fl w-100 w-third-ns pr2">
-              <p class="f4 lh-copy">Help finding the classes easily in the Book page</p>
-              <img src="Images/mindhouse/def/1.png" alt="">
+        <p class="f4 lh-copy">Because of the large number of classes(approx 70 per day), currently it is hard for a user to choose the class they are looking for. Because each class has an instructor, </p>
+        <p class="f4 b">Intro to the app</p>
+        <p class="f4 lh-copy">To understand the app, it’s a guided meditation tool(Like Headspace) but it has trainers who take live classes. I worked with Ashish Goel who leads the design at Mindhouse. Mindhouse used to have a physical studio where the classes happened but then COVID-19 struck and like all businesses Mindhouse shifted to online. So one of the primary interfaces that the app has is the Book tab. This lists down all the classes that are scheduled in a certain week which you can book and attend.</p>
+        <a href="https://apps.apple.com/in/app/mindhouse-modern-meditation/id1484471377" target="new" style="color: #7E58EA;">Check out the app</a><i data-feather="arrow-up-right" class="blue"></i>
+        
+        <p class="f4 b">Date filter</p>
+        <a data-src="Images/mindhouse/date.png" data-fancybox="">
+          <img class="br4" src="Images/mindhouse/date.png">
+        </a>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f4 lh-copy">In the past, people booked for the full week in advance because physical 
+                classes had limited capacity, but since online classes can be booked anytime, most people were booking right before the time slot</p>
             </div>
-            <div class="fl w-100 w-third-ns pr2">
-              <p class="f4 lh-copy">Choose a slot from the class page directly</p>
-              <img src="Images/mindhouse/def/2.png" alt="">
-            </div>
-            <div class="fl w-100 w-third-ns pr2">
-              <p class="f4 lh-copy">Re-work on the live class card info on the homepage</p>
-              <img src="Images/mindhouse/def/3.png" alt="">
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f4 lh-copy">The date selector is removed and a button is added. This opens up the selector as modal.</p>
             </div>
           </div>
         </div>
-        <h2 class="f3 lh-copy f2-ns" style="font-family: 'DM Sans', sans-serif; color: #5D5C6D;">Let's start with the Book page:</h2>
-        <img class="br3" src="Images/mindhouse/def/old_book.png" />
+
+
+        <p class="f4 b">Time of the day slots</p>
+        <a data-src="Images/mindhouse/date.png" data-fancybox="">
+          <img class="br4" src="Images/mindhouse/date.png">
+        </a>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f4 lh-copy">When changing from morning to evening time slot each time the page gets a refresh</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f4 lh-copy">Time slots are divided into tabs on the top making it the primary navigation and users can swipe to change the time of the day now</p>
+            </div>
+          </div>
+        </div>
 
         
 
-        <div class="siema">
+        <!-- <div class="siema">
           <div><img src="images/mindhouse/iter3/i1-main/1.jpg" alt=""></div>
           <div><img src="images/mindhouse/iter3/i1-main/2.jpg" alt=""></div>
-        </div>
+        </div> -->
         <button class="prev" style="border:0; padding:0;background:none;"><i data-feather="arrow-left-circle" class="black"></i></button>
         <button class="next" style="border:0; padding:0;background:none;"><i data-feather="arrow-right-circle" class="black"></i></button>
         <script>
