@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vibration Guide</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body ontouchstart="showCoordinates(event)" ontouchmove="showCoordinates(event)" id="myBody">
+
+  <center>
+      <div id="clock" class="clock">
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="12" id="btn1" class="btnstyle">12</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="1" id="btn2" class="btnstyle">1</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="2" id="btn3" class="btnstyle">2</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="3" id="btn4" class="btnstyle">3</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="4" id="btn5" class="btnstyle">4</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="5" id="btn6" class="btnstyle">5</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="6" id="btn7" class="btnstyle">6</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="7" id="btn8" class="btnstyle">7</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="8" id="btn9" class="btnstyle">8</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="9" id="btn10" class="btnstyle">9</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="10" id="btn11" class="btnstyle">10</button>
+        <button ondblclick="playSelected()" onclick="setActive(this.id)" type="button" name="11" id="btn12" class="btnstyle">11</button>
+      </div>
+    </center>
+
+<div id="expLog">
+<b>This is the experiment log.<b>
+</div>
+
+<div id="expLog2">
+
+</div>
+<div id="expLog3">
+
+</div>
+
+<button id="start" class="splbutton" onclick="startTest()">Start the test</button><p>
+
+<script>
+
+// document.getElementById('btn1').addEventListener("dblclick", playAudio("1"));
+// document.getElementById('btn2').addEventListener("dblclick", playAudio("2"));
+// document.getElementById('btn3').addEventListener("dblclick", playAudio("3"));
+// document.getElementById('btn4').addEventListener("dblclick", playAudio("4"));
+// document.getElementById('btn5').addEventListener("dblclick", playAudio("5"));
+// document.getElementById('btn6').addEventListener("dblclick", playAudio("6"));
+// document.getElementById('btn7').addEventListener("dblclick", playAudio("7"));
+// document.getElementById('btn8').addEventListener("dblclick", playAudio("8"));
+// document.getElementById('btn9').addEventListener("dblclick", playAudio("9"));
+// document.getElementById('btn10').addEventListener("dblclick", playAudio("10"));
+// document.getElementById('btn11').addEventListener("dblclick", playAudio("11"));
+// document.getElementById('btn12').addEventListener("dblclick", playAudio("12"));
+
+var timeStamps = new Array();
+var expLog = document.getElementById("expLog");
+var expLog2 = document.getElementById("expLog2");
+var expLog3 = document.getElementById("expLog3");
+var clock = document.getElementById("clock");
+var activeBtn = "btn1";
+var nextBtn = "btn1";
+var num = 0;
+
+function startTest() {
+  document.documentElement.webkitRequestFullScreen();
+  timeStamps.push(new Date());
+  expLog.innerHTML += '<p>Experiment start<br>' + timeStamps[num].getTime();
+  clock.style.display = "block";
+  document.getElementById("start").style.display = "none";
+  num++;
+}
+
+function playAudio(audioId){
+  var sndloc = "audio/sel/"+audioId+".mp3";
+  var snd = new Audio(sndloc);
+  snd.play();
+}
+
+function playSelected(){
+  var sndloc = "audio/selected.mp3";
+  var snd = new Audio(sndloc);
+  snd.play();
+}
+
+function blankFn(){
+
+}
+
+function setActive(buttonid) {
+    activeBtn = "btn" + num;
+    if (buttonid.localeCompare(activeBtn) == 0) {
+          timeStamps.push(new Date());
+          expLog.innerHTML += '<p>' + buttonid + ' clicked<br>' + timeStamps[num].getTime();
+          activeBtn = "btn" + num;
+          num++;
+          nextBtn = "btn" + num;
+        }
+    if (num == 13) {
+      endExperiment();
+    }
+    beep(buttonid);
+}
+
+function beep(buttonId) {
+    var audioId = document.getElementById(buttonId).name;
+    var snd = new Audio("audio/"+audioId+".mp3");
+    snd.play();
+}
+
+
+function showCoordinates(event) {
+  var duration = 0;
+  var btnY = document.getElementById(nextBtn).offsetTop + 19;
+  console.log(btnY);
+  var btnX = document.getElementById(nextBtn).offsetLeft + 19;
+  console.log(btnX);
+  var x = event.touches[0].clientX;
+  var y = event.touches[0].clientY;
+  document.getElementById('expLog3').innerHTML = "";
+  if (Math.abs(y-btnY) < 30){
+    duration = duration + 500/(Math.abs(y-btnY));
+    navigator.vibrate(duration, duration);
+    // document.getElementById('expLog3').innerHTML += "y match " + btnY + " : " + y + "\n";
+  }
+  if (Math.abs(x-btnX) < 30){
+    duration = duration + 500/(Math.abs(x-btnX));
+    navigator.vibrate(duration, duration);
+    // document.getElementById('expLog3').innerHTML += "x match" + btnX + " : " + x + "\n";
+  }
+  if (((Math.abs(y-btnY) < 30)) && (Math.abs(x-btnX) < 30)){
+    navigator.vibrate(150, 300, 150);
+    // document.getElementById('expLog3').innerHTML = "Both match";
+  }
+
+  if (((Math.abs(y-btnY) < 16)) && (Math.abs(x-btnX) < 16)){
+    var audioId = document.getElementById(nextBtn).name;
+    var snd = new Audio("audio/"+audioId+".mp3");
+    snd.play();
+  }
+  navigator.vibrate(duration, 5);
+
+function endExperiment() {
+  for (var i = 1; i < timeStamps.length; i++) {
+    document.getElementById('expLog2').innerHTML += "Button " + i + " took " + (timeStamps[i] - timeStamps[i-1]) + " ms.<br>";
+  }
+  clock.style.display = "none";
+}
+}
+
+</script>
+
+</body>
+
+</html>
