@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <script src="script/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 </head>
 <body style="background-color: #19171E;">
     <article class="mw8 pv6 pa4 center">
@@ -24,15 +27,34 @@
         <p class="white f3 lh-copy">
           All mobile applications widgets that are translated into different forms bsaed on the app use case or the language of the particular product. 
           For ex: Time picker is circular analog in certain applications while it is bifocal dial in certain applications. So circular dial requires users to
-           pick from digits placed circularly and an bifocal requires user to swipe to the right digit. Visual cues on the interface help sighted users to
+           pick from digits placed circularly and an bifocal requires user to swipe to the right digit. 
+           <br><br>
+           <a data-src="Images/P2/time_picker.png" data-fancybox="">
+            <img class="br4" src="Images/P2/time_picker.png">
+          </a>
+           <br><br>
+           Visual cues on the interface help sighted users to
             pick the right digits, but when it comes to screen readers all digits are read out as buttons that can be selected and the layout of the arrangement is
-             lost. 
+             lost based on user's model of the time picker(circul/bifocal) <span class="b i">causing the user to spend more time on the interface and losing interest. </span> 
              <br><br>
-             This project experiments if explaining the interface on the screen helps persons with visual impairement learn these widgets. Explaining the
-              conceptual model of the interaction widget helps users to translate it to other appliactions and thus using mobile phones on their own.
+             This project experiments if teaching unfamiliar widgets helps persons with visual impairement learn these widgets.
               <br><br>
-
+              
           </p>
+          <div class="mw9 mw0-ns center ph0-ns">
+            <div class="cf ph0-ns">
+              <div class="fl w-100 w-50-ns pa2 pa0-ns">
+                <p class="white f3 lh-copy">
+                  <span class="b">Users are unaware of the arrangement of the widget components:</span> 
+                  <br><br>
+                  To locate the widgets and it's compoenents on the screen an mental image has to be developed which passes the shape and position of the layout to the user by practising. Here's an video to explain it.
+                </p>
+              </div>
+              <div class="fl w-100 w-50-ns pa2 pl4-ns">
+                
+              </div>
+            </div>
+          </div>
         <p class="white f3">Following video(8 min) explains my intervention👇:</p>
         <div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/dd3e6e3913404ef69e07a834e952fbf0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
         <p class="white f3">Along with this there is another teaching method which I prototyped:</p>
