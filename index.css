@@ -7,12 +7,12 @@ body::-webkit-scrollbar {
     display: none;
 }
 h1{
-    color: #001B45;
+    color: #303030;
     font-weight: 800;
 }
 h2{
     font-family: 'DM Sans', sans-serif;
-    color: #001B45;
+    color: #303030;
 }
 .ibmplex{
     font-family: 'IBM Plex Sans', sans-serif;
