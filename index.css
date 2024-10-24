@@ -1,22 +1,25 @@
 body {
-    background-color: #F5F4F0;
-    font-family: 'Poppins', sans-serif;
+    background-color: #F4F4F4;
+    font-family: 'Rubik', sans-serif;
     overflow-y: scroll;
 }
 body::-webkit-scrollbar {
     display: none;
 }
-h1{
+a{
+    color: #0f0e12;
+}
+/* h1{
     color: #303030;
     font-weight: 800;
 }
 h2{
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #303030;
 }
 .ibmplex{
     font-family: 'IBM Plex Sans', sans-serif;
-}
+} */
 
 .headline em{
     color: #FFE176;
@@ -27,6 +30,11 @@ h2{
 p em{
     color: #FFE176;
     font-style: normal;
+}
+p{
+    color: #555;
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
 }
 
 figcaption h3{
