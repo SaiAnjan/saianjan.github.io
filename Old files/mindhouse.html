@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree final project</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="mindhouse.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="script/feather.min.js"></script>
+    <script src="script/siema.min.js"></script>
+</head>
+<body style="background-color: #DAD7E0;">
+    <article class="mw8 pv6 pa4 center">
+        <a href="index.html" class="br2 br3-ns f7 f5-ns no-underline dark-gray bg-animate hover-bg-dark-gray hover-white inline-flex items-center pa2 pa3-ns ba border-box mr4">
+            <svg class="w1" data-icon="chevronLeft" viewBox="0 0 32 32" style="fill:currentcolor">
+              <title>chevronLeft icon</title>
+              <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
+            </svg>
+          <span class="pl1">Home</span>
+        </a>
+        <div>
+            <h1 class="f2 lh-copy f1-ns" style="font-family: 'DM Sans', sans-serif; color: #7E58EA;">Re-Designing Live class filtering</h1>
+        </div>
+        <p class="f4 b">Context</p>
+        <p class="f4 lh-copy">Mindhouse is an meditation app and offers 7 different courses/techniques and 4 courses have a mini version also. Each course has different types and classes are taken by different instructors. A way to think about it would be through a university analogy. Physics is the course. It could have multiple classes, with different professors, and different material being taught in each class. In total there are about 70 different classes in a single day on the app. </p>
+        <a href="https://www.mindhouse.com/courses/" target="new" style="color: #7E58EA;">Check out Mindhouse</a><i data-feather="arrow-up-right" class="blue"></i>
+        <p class="f2 lh-copy">"Make it easier to choose a live class for the user"</p>
+        <p class="f4 b">Intro to the app</p>
+        <p class="f4 lh-copy">To understand the app, it’s a guided meditation tool(Like Headspace) but it has trainers who take live classes. I worked with Ashish Goel who leads the design at Mindhouse. Mindhouse used to have a physical studio where the classes happened but then COVID-19 struck and like all businesses Mindhouse shifted to online. So one of the primary interfaces that the app has is the Book tab. This lists down all the classes that are scheduled in a certain week which you can book and attend.</p>
+        <a href="https://apps.apple.com/in/app/mindhouse-modern-meditation/id1484471377" target="new" style="color: #7E58EA;">Check out the app</a><i data-feather="arrow-up-right" class="blue"></i>
+        <p class="f4 lh-copy">Following is the existing live classes booking page and the parts of it:</p>
+        <a data-src="Images/mindhouse/old_book.png" data-fancybox="">
+          <img class="br4" src="Images/mindhouse/old_book.png">
+        </a>
+        <p class="f4 lh-copy">Because of the large number of classes(approx 70 per day), currently it is hard for a user to choose the class they are looking for.
+           Because while booking a slot of the class they want, Users are looking for Course name, Sub class type name, Is it taken by their favourite instructor, 
+           what time of the day is the class available etc., So users need to have this information first hand for selecting the class they want and find it easily.</p> 
+           <p class="f2 lh-copy">Skimming through these different types of information cards and finding what they're looking for should be easy. </p>
+           <a data-src="Images/mindhouse/new_book.png" data-fancybox="">
+            <img class="br4" src="Images/mindhouse/new_book.png">
+          </a>
+           <p class="f4 lh-copy">To find these classes following filtering techniques and design changes are made to the existing live classes page:</p>
+        
+        
+        <p class="f4 b">Day Selector</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/date-old.png" data-fancybox="">
+                <img src="Images/mindhouse/date-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">In the past, people booked for the full week in advance because physical 
+                classes had limited capacity, but since online classes can be booked anytime, most people were booking right before the time slot</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/date-new.png" data-fancybox="">
+                <img src="Images/mindhouse/date-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">Since the date filter is not a frequent interaction element, I decided to remove the filter to add vertical space. 
+                The new date selection is a button that opens up the selector as a modal.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <p class="f4 b">Time of the day slots</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/time-old.png" data-fancybox="">
+                <img src="Images/mindhouse/time-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">Users primary mode of interaction for finding out the class they are looking for is the time of day.
+                When changing from morning to evening time slot the floating action button on the left has to be opened every time.
+              Also, when the time slot is changed the page gets refreshed.</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/time-new.png" data-fancybox="">
+                <img src="Images/mindhouse/time-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">Since there are 70 classes on average per day, I changed the time slot filter from floating action button to 
+                tabs on the top. Realising that these classes can be find based on Early Morning, Morning, Afternoon, Post evening I added these as the ttabs.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <p class="f4 b">Class Filters</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/filters-old.png" data-fancybox="">
+                <img src="Images/mindhouse/filters-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">To see all the slots available for a particular class, users are required to select the class from the carousel on the top
+                 represented as pills. To view all classes users are required to select all the pills.
+              </p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/filters-new.png" data-fancybox="">
+                <img src="Images/mindhouse/filters-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">Filtering classes is the ssecond most important interaction element used. Putting all the classes together at one place 
+                in a modal as opposed to the existing carousel allowed users to view all the selected classes at a glance and also deselect faster. 
+                'All' has been added to select all classes at once instead of deselecting all the pills. Recommended classes for the user's goals can be selected
+              by toggling 'recommended' ON.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="f4 b">Finding favourite instructor</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/instructor-old.png" data-fancybox="">
+                <img src="Images/mindhouse/instructor-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">A class can be taken by multiple instructors. Users prefer certain instructors and it’s not possible to choose based on the instructor. So people open the class and then have to find out the instructor.</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/instructor-new.png" data-fancybox="">
+                <img src="Images/mindhouse/instructor-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">I added the instructor name on the card as metadata along with duration, practice level. Users can now view the instructor name while viewing the slots instead of going inside and finding out.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <p class="f4 b">Sub Class Type</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/class-old.png" data-fancybox="">
+                <img src="Images/mindhouse/class-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">Users maintain a note for vital yoga upper body and lower body(remember the physics analogy?) which is not possible in the existing book page. For Ex: There’s a course name which is primary(Vital Yoga) and then the class type which is secondary(Upper body/Lower body)</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/class-new.png" data-fancybox="">
+                <img src="Images/mindhouse/class-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">Slot cards have been added with the sub class type along with the main course name. The title on the card in dark gray is the course name title and the sub class type is in lighter gray.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <p class="f4 b">Save that favourite class</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/favourites-old.png" data-fancybox="">
+                <img src="Images/mindhouse/favourites-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">Users have preferences when it comes to live classes mainly focussing on a particular type of class taken by a particular instructor. Even when the instructor name is added in the metadata users repeat these classes and currently, they have to repeat that action every time-searching for a particular class and then a particular instructor</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/favourites-new.png" data-fancybox="">
+                <img src="Images/mindhouse/favourites-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">I added a favourite action to save these classes as favourites and then book that class whenever it’s available in the week. 
+              Because saving these classes makes it easier to repeat a live class of favourite instructor or technique. Since each class also has a subclass type 
+              the favourite button saves the class+sub class type+instructor.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <p class="f4 b">Viewing favourite classes</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/fav-toggle.png" data-fancybox="">
+                <img src="Images/mindhouse/fav-toggle.png">
+              </a>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f4 lh-copy">To access those favourite classes I've added a favourite toggle along with the Mini toggle.</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <p class="f4 b">Mini Duration Classes</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/mini-old.png" data-fancybox="">
+                <img src="Images/mindhouse/mini-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">Each course has a longer duration and a shorter duration and currently, these two are separate courses resulting in the users requiring to choose a shorter duration class as a separate course. That means when users select Musical mindfulness the shorter classes are not shown</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/mini-new.png" data-fancybox="">
+                <img src="Images/mindhouse/mini-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">Mini is added as a toggle on the top to easily filter shorter duration courses. Since users can join a live class this lets anyone who is looking for a quick short class</p>
+            </div>
+          </div>
+        </div>
+
+
+        <p class="f4 b">Booked classes</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/booked-old.png" data-fancybox="">
+                <img src="Images/mindhouse/booked-old.png">
+              </a>
+              <p class="f4 b old">Old</p>
+              <p class="f4 lh-copy">Classes that are pre booked are pinned on the top of the list with time of the class, class details with a 'Join Class' and 'Invite Buddy'. Classes that are booked and live can be joined from here.</p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/booked-new.png" data-fancybox="">
+                <img src="Images/mindhouse/booked-new.png">
+              </a>
+              <p class="f4 b new">New</p>
+              <p class="f4 lh-copy">The time of the booked class is not visible and so it is moved to the right and made bigger in font size increasing the visibility while showing the info the class with the metadata. For classes which are live have a 'JOIN' button while classes upcoming have a countdown timer.</p>
+            </div>
+          </div>
+        </div>
+
+        
+        
+        <p class="f4 b">New Card design</p>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <a data-src="Images/mindhouse/card-desc.png" data-fancybox="">
+                <img src="Images/mindhouse/card-desc.png">
+              </a>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f4 lh-copy">Finally, the new card design and the filters allow user to choose classes that are by their favourite instructor, class type and time of the day. The information avaialable on the card are:</p>
+              <p class="f4 lh-copy">• Recommended, Mini, Hindi</p>
+              <p class="f4 lh-copy">• Class Name</p>
+              <p class="f4 lh-copy">• Sub Class Type</p>
+              <p class="f4 lh-copy">• Instructor name, Format & Duration, Experience level</p>
+              <p class="f4 lh-copy">• Book/Join</p>
+            </div>
+          </div>
+        </div>
+
+        <section class="ph3 ph5-ns pv5">
+          <article class="mw8 center br2 ba b--light-purple bg-near-white">
+            <div class="dt-ns dt--fixed-ns w-100">
+              <div class="pa3 pa4-ns dtc-ns v-mid">
+                <div>
+                  <h2 class="fw4 purple mt0 mb3">This was a month long work</h2>
+                  <p class="black-70 measure lh-copy mv0">
+                    I can show you the iterations we did and how we dropped certain other designs and reached at a final idea which got delivered. 
+                  </p>
+                </div>
+              </div>
+              <div class="pa3 pa4-ns dtc-ns v-mid">
+                <a href="mailto:saianjan.margani@gmail.com" class="no-underline f6 tc db w-100 pv3 bg-animate bg-light-purple hover-bg-purple white br2">Say Hi👋</a>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        
+        <script>
+            feather.replace()
+        </script>
+    </article>
+</body>
+</html>

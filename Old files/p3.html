@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree final project</title>
+    <link rel="stylesheet" href="p3.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="script/feather.min.js"></script>
+    <script src="script/siema.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <article class="mw8 pv5 pa4 center">
+        <a href="index.html" class="br2 br3-ns f7 f5-ns no-underline gray bg-animate hover-bg-dark-blue hover-white inline-flex items-center pa2 pa3-ns ba border-box mr4">
+            <svg class="w1" data-icon="chevronLeft" viewBox="0 0 32 32" style="fill:currentcolor">
+              <title>chevronLeft icon</title>
+              <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
+            </svg>
+          <span class="pl1">Home</span>
+        </a>
+        <div class="mw9 center pl0-ns">
+          <div class="cf pl0-ns">
+            <div class="fl w-100 w-60-ns pa2 pl0-ns">
+              <h1 class="f2 dark-gray f1-ns mb0">Conversational agent for Railway enquiry</h1>
+              <p class="f3 lh-copy dm light-silver">An enquiry kiosk prototype that uses voice technology to answer natural language queries about Trains to destination, timings, platform numbes etc., in Hindi using Google assistant.</p>
+            </div>
+            <div class="fl w-100 w-40-ns pa2 pt5-ns">
+              <h3 class="lh-copy dm dark-gray">"I think this is a good utility to convert an otherwise tedious task into a more easy, everyday activity, so yes I do like the idea of such an agent"</h3>
+              <h4 class="mb0">Abhishek</h4>
+              <p class="mt1 silver">Passenger since 2012</p>
+            </div>
+          </div>
+        </div>
+        <a data-src="Images/P3/cover.png" data-fancybox="">
+          <img class="br4" src="Images/P3/cover.png">
+        </a>
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <p class="f4 lh-copy">This is an masters design project where we can choose our own problem and address it thorugh design. In January 2020 I was travelling to varanasi and I noticed in the railway station
+                that there is a long queue in the enquiry counter and it took time for me to get a simple answer. While I could have downloaded an app to get my question answered there are lots of apps related to each
+                category(Booking, platform, where is my train etc.,) with different information architecture in each app but face-to-face enquiry allows passengers to talk to an human and get meaningful answers.
+                <br><br>
+                <span class="b">The Goal:</span> Disseminating information which was available both at platform and on personal mobile devices through an Conversational Agent(VUI) allowing natural mode of inteaction using voice.
+              </p>
+            </div>
+            <div class="fl w-100 w-50-ns pa2 pl4-ns">
+              <br><br>
+              <p class="f4 lh-copy"> <span class="b">Duration:</span> Jan'20 - May'20</p>
+              <p class="f4 lh-copy"><span class="b">My Role:</span> Conversation Design + UX Design</p>
+              <p class="f4 lh-copy"><span class="b">Key Skills:</span> User interviews</p>
+              <p class="f4 lh-copy">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Concept ideation</p>
+              <p class="f4 lh-copy">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Interaction design</p>
+              <p class="f4 lh-copy">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Visual design</p>
+              <p class="f4 lh-copy">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Prototyping</p>
+            </div>
+          </div>
+        </div>
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <iframe src="https://player.vimeo.com/video/481032382" width="375" height="667" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+            <div class="fl w-100 w-50-ns pa2 pl4-ns">
+              <p class="f4 lh-copy"> <span class="b">The Solution:</span> As a result I came up with an voice assistant that runs on mobile phones(Google assistant) <span class="b">by recognising user's request in Hindi and responds in natural language combined with the live database of indian railways.</span>
+                <br>The train information like timings, train number, departure & destination for a single day are put in a spreadsheet which is connected to the 
+              </p>
+            </div>
+          </div>
+        </div>
+        
+  
+        
+
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <iframe width="330" height="620" src="https://www.youtube.com/embed/Jt3kqFIGmx0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f3 lh-copy">Trains to destination + Add reminder</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <iframe width="330" height="620" src="https://www.youtube.com/embed/rnDZMG1kqDU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f3 lh-copy">Multiple trains to a destination</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <iframe width="330" height="620" src="https://www.youtube.com/embed/7fRAaXfxn-E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f3 lh-copy">Train is delayed</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <iframe width="330" height="620" src="https://www.youtube.com/embed/tsVJdJnkhGk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f3 lh-copy">Physical Kiosk at the station</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mw9 mw0-ns center ph0-ns">
+          <div class="cf ph0-ns">
+            <div class="fl w-100 w-50-ns pa2 pa0-ns">
+              <iframe width="330" height="620" src="https://www.youtube.com/embed/pG2tywJtFoc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <p class="f3 lh-copy">Context change</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!--
+        <h1 class="f1 fw3">Pain points involved in enquiry system for the passengers:</h1>
+
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-third-ns pa2">
+              <h3 class="f3">Primary research</h3>
+              <p class="f4">Interviews with passengers and enquiry staff at Mumbai CSMT.</p>
+            </div>
+            <div class="fl w-100 w-third-ns pa2">
+              <h3 class="f3">Secondary research</h3>
+              <p class="f4">Looked at the applications that are stated by the users and the most used railway apps.</p>
+            </div>
+            <div class="fl w-100 w-third-ns pa2">
+              <h3 class="f3">Enquiry system</h3>
+              <p class="f4">Understood the different categories of enquiry and information from the staff and the control center.</p>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="f2 mb0">1. Agency/Autonomy</h4></br>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-lightest-blue lh-copy">
+                <p>The current enquiry process clearly indicates a need for self service system.</p>
+              </div>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-washed-red lh-copy">
+                <li>Mumbai CSMT station has <span class="b red">18 platforms</span> and there are <span class="b red">no self service systems</span> on these platforms making the dependance to be on the enquiry counter at the station entry/exit.</li>
+                <li>Passengers in the enquiry queue have a sense of <span class="b red">rushness</span> because of others in the queue.</li>
+                <li>“Most of the enquiry questions are <span class="b red">same</span>.”</li>
+                <li>“The 5 important categories are the same and the <span class="b red">way</span> the questions are asked <span class="b red">is different</span>.”</li>
+                <li>“In CSMT <span class="b red">1 person</span> sits for <span class="b red">12 hours</span> staring at a computer screen and answering in the MIC.”</li>
+                <li>“Passengers questions <span class="b red">irritate</span> us a lot of time and they are <span class="b red">repeated</span>.”</li>
+                <li>“Railways already spends <span class="b red">50%</span> of its expenditure on <span class="b red">manpower</span>.”</li>
+                <li>“But we are still <span class="b red">underpaid</span>.”</li>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h4 class="f2 mb0">2. Accessibility</h4></br>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-lightest-blue lh-copy">
+                <p>People don't really know how to use all the different platforms.</p>
+              </div>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-washed-red lh-copy">
+                <li>Most of the emergent users are <span class="b red">dependent</span> on their family members for using the mobile applications.</li>
+                <li>While enquiry counters can be used on the station, mobile applications are mostly used for <span class="b red">planning</span> a journey and making a <span class="b red">reservation</span>.</li>
+                <li><span class="b red">Digital payments</span> is an big hurdle for these emergent users.</li>
+                <li>The UI requires the user to <span class="b red">login every time</span>. The app requires to verify mobile number and email id everytime.</li>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="f2 mb0">3. Governance</h4></br>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-lightest-blue lh-copy">
+                <li>People are finding too many disconnected platforms to find information.</li>
+                <li>There is a disconnect in terms of what application does what.</li>
+              </div>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-washed-red lh-copy">
+                <li>"This app(IRCTC) handles <span class="b red">only the reservation and booking</span> part of the indian railways leaving other parts of the information to 3rd party apps."</li>
+                <li>Definitely mobile applications are creating a <span class="b red">confusion</span> because of the existence of <span class="b red">numerous number</span> of applications.</li>
+                <li>There should be another meta mode of <span class="b red">information dissemination.</span></li>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <h4 class="f2 mb0">4. Effort</h4></br>
+        <div class="mw9 center ph3-ns">
+          <div class="cf ph2-ns">
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-lightest-blue lh-copy">
+                <li>There is a process of applying thinking to plan a journey in the applications/websites.</li>
+              </div>
+            </div>
+            <div class="fl w-100 w-50-ns pa2">
+              <div class="pa4 f4 br3 bg-washed-red lh-copy">
+                <li>Information display systems require the passengers to be able to read while the face to face enquiry provides <span class="b red">voice</span> as the mode of interaction.</li>
+                <li>While these apps provide the most important parts of the information required these require the passengers to apply <span class="b red">cognitive thinking.</span></li>
+              </div>
+            </div>
+          </div>
+        </div>
+        -->
+        <script>
+          feather.replace()
+        </script>
+    </article>
+</body>
+</html>
