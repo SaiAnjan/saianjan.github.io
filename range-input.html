@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Range Input - Sai Anjan</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="script/feather.min.js"></script>
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+            --color-primary: #0d9488;
+            --color-error: #dc2626;
+            --color-success: #059669;
+            --color-text: #1f2937;
+            --color-text-secondary: #6b7280;
+            --color-background: #f8fafc;
+            --color-border: #e2e8f0;
+        }
+        * {
+            font-family: var(--font-inter) !important;
+        }
+        body { 
+            background-color: var(--color-background);
+            color: var(--color-text);
+        }
+        .input-container {
+            position: relative;
+            width: 160px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+            background: white;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        .help-text {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+        }
+        .unit {
+            color: var(--color-text-secondary);
+            font-weight: normal;
+        }
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        .error-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .input-field.error {
+            border-color: var(--color-error);
+        }
+        .input-field.success {
+            border-color: var(--color-success);
+        }
+        .input-field.warning {
+            border-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.05);
+            transition: all 0.3s ease;
+        }
+        .input-field.warning:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="w-100 bg-white fixed z-999 shadow-1">
+        <div class="mw8 center ph4-ns ph3">
+            <a href="index.html" class="link dim black dib">
+                <i data-feather="arrow-left" class="v-mid mr2"></i>
+                <span class="f6 fw5">Back to Projects</span>
+            </a>
+        </div>
+    </nav>
+
+    <article class="pt5">
+        <header class="bg-white pb6 pt5">
+            <div class="mw8 center ph4-ns ph3">
+                <h1 class="f2 f1-ns fw6 lh-title mb3">Dual Range Input</h1>
+                <p class="f4 lh-copy measure-wide gray mv4">
+                    A responsive dual-input field component for value ranges with automatic validation and adjustment.
+                </p>
+            </div>
+        </header>
+
+        <main class="mw8 center ph4-ns ph3">
+            <section class="mv6">
+                <div class="flex flex-wrap items-start" style="gap: 12px;">
+                    <div class="w-auto">
+                        <div class="input-container">
+                            <label class="input-label" for="average">Average <span class="unit">(meq/L)</span></label>
+                            <input 
+                                type="number" 
+                                id="average" 
+                                class="input-field" 
+                                placeholder="0.079"
+                                min="0"
+                                max="4600"
+                                step="0.01"
+                            >
+                            <div class="help-text">Range: 0.00-4600.00</div>
+                            <div class="error-message" id="average-error"></div>
+                        </div>
+                    </div>
+                    <div class="w-auto">
+                        <div class="input-container">
+                            <label class="input-label" for="endpoint">End Point <span class="unit">(meq/L)</span></label>
+                            <input 
+                                type="number" 
+                                id="endpoint" 
+                                class="input-field" 
+                                placeholder="0.7"
+                                min="0"
+                                max="4600"
+                                step="0.01"
+                            >
+                            <div class="help-text">Range: 0.00-4600.00</div>
+                            <div class="error-message" id="endpoint-error"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </article>
+
+    <script>
+        feather.replace();
+
+        const averageInput = document.getElementById('average');
+        const endpointInput = document.getElementById('endpoint');
+        const averageError = document.getElementById('average-error');
+        const endpointError = document.getElementById('endpoint-error');
+
+        // Debounce function to wait for user to stop typing
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function getDecimalPlaces(num) {
+            const match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+            if (!match) return 0;
+            return Math.max(
+                0,
+                (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0)
+            );
+        }
+
+        function calculateEndpoint(average) {
+            const decimalPlaces = getDecimalPlaces(average);
+            let increment;
+            if (decimalPlaces === 0) {
+                increment = 1;
+            } else if (decimalPlaces === 1) {
+                increment = 0.1;
+            } else {
+                increment = 0.01;
+            }
+            return average + increment;
+        }
+
+        function calculateAverage(endpoint) {
+            const decimalPlaces = getDecimalPlaces(endpoint);
+            let decrement;
+            if (decimalPlaces === 0) {
+                decrement = 1;
+            } else if (decimalPlaces === 1) {
+                decrement = 0.1;
+            } else {
+                decrement = 0.01;
+            }
+            return endpoint - decrement;
+        }
+
+        function validateInputs(event) {
+            const average = parseFloat(averageInput.value) || 0;
+            const endpoint = parseFloat(endpointInput.value) || 0;
+            const changedInput = event.target.id;
+            const inputDecimalPlaces = getDecimalPlaces(event.target.value || "0");
+
+            // Reset styles
+            averageInput.classList.remove('error', 'success', 'warning');
+            endpointInput.classList.remove('error', 'success', 'warning');
+            averageError.classList.remove('visible');
+            endpointError.classList.remove('visible');
+
+            if (changedInput === 'average' && average >= endpoint) {
+                // If average input was changed and its value is >= endpoint
+                const newEndpoint = calculateEndpoint(average);
+                if (newEndpoint <= 4600) {
+                    endpointInput.value = newEndpoint.toFixed(inputDecimalPlaces);
+                    endpointInput.classList.add('warning');
+                    endpointError.textContent = `End Point adjusted to ${newEndpoint.toFixed(inputDecimalPlaces)}`;
+                    endpointError.classList.add('visible');
+                    setTimeout(() => {
+                        endpointInput.classList.remove('warning');
+                        endpointError.classList.remove('visible');
+                    }, 1500);
+                }
+            } else if (changedInput === 'endpoint' && endpoint <= average) {
+                // If endpoint input was changed and its value is <= average
+                const newAverage = calculateAverage(endpoint);
+                if (newAverage >= 0) {
+                    averageInput.value = newAverage.toFixed(inputDecimalPlaces);
+                    averageInput.classList.add('warning');
+                    averageError.textContent = `Average adjusted to ${newAverage.toFixed(inputDecimalPlaces)}`;
+                    averageError.classList.add('visible');
+                    setTimeout(() => {
+                        averageInput.classList.remove('warning');
+                        averageError.classList.remove('visible');
+                    }, 1500);
+                }
+            }
+
+            // Validate range
+            if (average < 0) {
+                averageInput.classList.add('error');
+                averageError.textContent = 'Value cannot be less than 0';
+                averageError.classList.add('visible');
+            } else if (average > 4600) {
+                averageInput.classList.add('error');
+                averageError.textContent = 'Value cannot exceed 4600';
+                averageError.classList.add('visible');
+            } else {
+                averageInput.classList.add('success');
+            }
+
+            if (endpoint < 0) {
+                endpointInput.classList.add('error');
+                endpointError.textContent = 'Value cannot be less than 0';
+                endpointError.classList.add('visible');
+            } else if (endpoint > 4600) {
+                endpointInput.classList.add('error');
+                endpointError.textContent = 'Value cannot exceed 4600';
+                endpointError.classList.add('visible');
+            } else {
+                endpointInput.classList.add('success');
+            }
+        }
+
+        // Create debounced versions of the validation function
+        const debouncedValidateInputs = debounce(validateInputs, 500);
+
+        // Add event listeners with debounced validation
+        averageInput.addEventListener('input', debouncedValidateInputs);
+        endpointInput.addEventListener('input', debouncedValidateInputs);
+    </script>
+</body>
+</html> 
