@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindhouse - Live Class Filtering Redesign</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="script/feather.min.js"></script>
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+        }
+        * {
+            font-family: var(--font-inter) !important;
+        }
+        body { 
+            background-color: #fafafa;
+            font-family: var(--font-inter) !important;
+        }
+        .old { color: #E47D78; }
+        .new { color: #81C185; }
+        .text-primary { color: #333333; }
+        .text-secondary { color: #666666; }
+        .bg-mindhouse { background-color: #7E58EA; }
+        .hover-bg-mindhouse:hover { background-color: #7E58EA; }
+        .comparison-card {
+            transition: transform 0.2s ease;
+        }
+        .comparison-card:hover {
+            transform: translateY(-4px);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-inter) !important;
+            font-weight: 600 !important;
+        }
+        p, span, a, li, blockquote {
+            font-family: var(--font-inter) !important;
+            font-weight: 400 !important;
+        }
+        .f1, .f2, .f3, .f4, .f5, .f6, .f7 {
+            font-family: var(--font-inter) !important;
+        }
+    </style>
+</head>
+<body class="bg-near-white">
+    <nav class="w-100 bg-white fixed z-999 shadow-1">
+        <div class="mw8 center ph4-ns ph3 pv3">
+            <a href="index.html" class="link dim black dib">
+                <i data-feather="arrow-left" class="v-mid mr2"></i>
+                <span class="f6 fw5">Back to Projects</span>
+            </a>
+        </div>
+    </nav>
+
+    <article class="pt5">
+        <!-- Hero Section -->
+        <header class="bg-white pb6 pt5">
+            <div class="mw8 center ph4-ns ph3">
+                <h1 class="f2 f1-ns fw6 lh-title mb3 text-primary">Re-Designing Live Class Filtering</h1>
+                <p class="f4 lh-copy measure-wide text-secondary mv4">A UX case study on improving the class discovery and booking experience for Mindhouse meditation app users.</p>
+                <a href="https://www.mindhouse.com/courses/" target="_blank" class="link dim bg-mindhouse white br2 ph4 pv2 dib f5">
+                    Visit Mindhouse
+                    <i data-feather="arrow-up-right" class="ml2 v-mid"></i>
+                </a>
+            </div>
+        </header>
+
+        <main class="mw8 center ph4-ns ph3">
+            <!-- Context -->
+            <section class="mv6">
+                <h2 class="f3 fw6 text-primary mb4">Context</h2>
+                <div class="measure-wide">
+                    <p class="f5 lh-copy text-secondary mv0">Mindhouse is a meditation app offering 7 different courses/techniques, with 4 courses having mini versions. Each course has different types and classes are taken by different instructors. Think of it like a university - Physics is the course, with multiple classes, different professors, and varied material in each class. The app hosts approximately 70 different classes daily.</p>
+                    <blockquote class="bl bw3 b--mindhouse pl4 ml0 mt4 mb0">
+                        <p class="f3 fw6 lh-title mv0">"Make it easier for users to choose a live class"</p>
+                    </blockquote>
+                </div>
+            </section>
+
+            <!-- App Introduction -->
+            <section class="mv6">
+                <h2 class="f3 fw6 text-primary mb4">About the App</h2>
+                <div class="measure-wide">
+                    <p class="f5 lh-copy text-secondary mv0">Mindhouse is a guided meditation tool (similar to Headspace) with live trainers conducting classes. I collaborated with Ashish Goel, who leads design at Mindhouse. Originally a physical studio, Mindhouse transitioned to online classes during COVID-19. The Book tab is a crucial interface, listing all scheduled classes for the week that users can book and attend.</p>
+                    <a href="https://apps.apple.com/in/app/mindhouse-modern-meditation/id1484471377" target="_blank" class="link dim bg-mindhouse white br2 ph4 pv2 dib mt4 f5">
+                        View in App Store
+                        <i data-feather="arrow-up-right" class="ml2 v-mid"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Current Design -->
+            <section class="mv6">
+                <h2 class="f3 fw6 text-primary mb4">Current Design</h2>
+                <div class="measure-wide mb4">
+                    <p class="f5 lh-copy text-secondary mv0">Here's the existing live classes booking page and its components:</p>
+                </div>
+                <div class="bg-white pa4 br3 shadow-2">
+                    <a data-fancybox="gallery" href="Images/mindhouse/old_book.png" class="db">
+                        <img class="w-100 br2" src="Images/mindhouse/old_book.png" alt="Current booking page design">
+                    </a>
+                </div>
+                <div class="measure-wide mt4">
+                    <p class="f5 lh-copy text-secondary">With approximately 70 classes per day, users struggle to find their preferred classes. When booking, they need to consider multiple factors:</p>
+                    <ul class="list pl0 mt4">
+                        <li class="flex items-center mb3">
+                            <div class="w2 h2 br-100 bg-mindhouse o-70 mr3 flex items-center justify-center">
+                                <i data-feather="book" class="white"></i>
+                            </div>
+                            <span class="f5 text-secondary">Course name and sub-class type</span>
+                        </li>
+                        <li class="flex items-center mb3">
+                            <div class="w2 h2 br-100 bg-mindhouse o-70 mr3 flex items-center justify-center">
+                                <i data-feather="user" class="white"></i>
+                            </div>
+                            <span class="f5 text-secondary">Favorite instructor availability</span>
+                        </li>
+                        <li class="flex items-center mb3">
+                            <div class="w2 h2 br-100 bg-mindhouse o-70 mr3 flex items-center justify-center">
+                                <i data-feather="clock" class="white"></i>
+                            </div>
+                            <span class="f5 text-secondary">Preferred time slots</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- New Design -->
+            <section class="mv6">
+                <h2 class="f3 fw6 text-primary mb4">The Redesign</h2>
+                <div class="measure-wide mb4">
+                    <p class="f5 lh-copy text-secondary mv0">The new design focuses on making information discovery faster and more intuitive:</p>
+                </div>
+                <div class="bg-white pa4 br3 shadow-2">
+                    <a data-fancybox="gallery" href="Images/mindhouse/new_book.png" class="db">
+                        <img class="w-100 br2" src="Images/mindhouse/new_book.png" alt="New booking page design">
+                    </a>
+                </div>
+            </section>
+
+            <!-- Design Changes -->
+            <section class="mv6">
+                <h2 class="f3 fw6 text-primary mb4">Key Improvements</h2>
+                
+                <!-- Day Selector -->
+                <div class="mv5">
+                    <h3 class="f4 fw6 text-primary mb4">Day Selector</h3>
+                    <div class="flex-l items-stretch">
+                        <div class="w-50-l pr3-l mb4 mb0-l">
+                            <div class="h-100 bg-white pa4 br3 shadow-2 comparison-card">
+                                <img src="Images/mindhouse/date-old.png" alt="Old date selector" class="w-100 br2 mb3">
+                                <h4 class="f5 fw6 old mv2">Before</h4>
+                                <p class="f5 lh-copy text-secondary mv0">Weekly view optimized for physical classes with limited capacity.</p>
+                            </div>
+                        </div>
+                        <div class="w-50-l pl3-l">
+                            <div class="h-100 bg-white pa4 br3 shadow-2 comparison-card">
+                                <img src="Images/mindhouse/date-new.png" alt="New date selector" class="w-100 br2 mb3">
+                                <h4 class="f5 fw6 new mv2">After</h4>
+                                <p class="f5 lh-copy text-secondary mv0">Simplified modal date picker for better space utilization and focus on today's classes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Slots -->
+                <div class="mv5">
+                    <h3 class="f4 fw6 text-primary mb4">Time Slots</h3>
+                    <div class="flex-l items-stretch">
+                        <div class="w-50-l pr3-l mb4 mb0-l">
+                            <div class="h-100 bg-white pa4 br3 shadow-2 comparison-card">
+                                <img src="Images/mindhouse/time-old.png" alt="Old time slots" class="w-100 br2 mb3">
+                                <h4 class="f5 fw6 old mv2">Before</h4>
+                                <p class="f5 lh-copy text-secondary mv0">Hidden in a floating action button, requiring extra clicks.</p>
+                            </div>
+                        </div>
+                        <div class="w-50-l pl3-l">
+                            <div class="h-100 bg-white pa4 br3 shadow-2 comparison-card">
+                                <img src="Images/mindhouse/time-new.png" alt="New time slots" class="w-100 br2 mb3">
+                                <h4 class="f5 fw6 new mv2">After</h4>
+                                <p class="f5 lh-copy text-secondary mv0">Easily accessible tabs categorized by time of day for quick filtering.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-white pv5 mt6">
+            <div class="mw8 center ph4-ns ph3 tc">
+                <p class="f6 text-secondary mb3">Made with ❤️ in Hyderabad, India</p>
+                <div class="mt3">
+                    <a href="https://x.com/Dhaathre" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="https://dribbble.com/saianjan" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            feather.replace();
+        </script>
+    </article>
+</body>
+</html>

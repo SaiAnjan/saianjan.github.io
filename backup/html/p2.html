@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 - Sai Anjan</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="script/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+        }
+        * {
+            font-family: var(--font-inter) !important;
+        }
+        body { 
+            background-color: #fafafa;
+            font-family: var(--font-inter) !important;
+        }
+        .text-primary { color: #333333; }
+        .text-secondary { color: #666666; }
+        .bg-project { background-color: #4285F4; }
+        .hover-bg-project:hover { background-color: #4285F4; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-inter) !important;
+            font-weight: 600 !important;
+        }
+        p, span, a, li, blockquote {
+            font-family: var(--font-inter) !important;
+            font-weight: 400 !important;
+        }
+        .f1, .f2, .f3, .f4, .f5, .f6, .f7 {
+            font-family: var(--font-inter) !important;
+        }
+    </style>
+</head>
+<body class="bg-near-white">
+    <nav class="w-100 bg-white fixed z-999 shadow-1">
+        <div class="mw8 center ph4-ns ph3 pv3">
+            <a href="index.html" class="link dim black dib">
+                <i data-feather="arrow-left" class="v-mid mr2"></i>
+                <span class="f6 fw5">Back to Projects</span>
+            </a>
+        </div>
+    </nav>
+
+    <article class="pt5">
+        <header class="bg-white pb6 pt5">
+            <div class="mw8 center ph4-ns ph3">
+                <h1 class="f2 f1-ns fw6 lh-title mb3 text-primary">Project 2</h1>
+                <p class="f4 lh-copy measure-wide text-secondary mv4">A brief description of Project 2</p>
+                <a href="#" target="_blank" class="link dim bg-project white br2 ph4 pv2 dib f5">
+                    View Project
+                    <i data-feather="arrow-up-right" class="ml2 v-mid"></i>
+                </a>
+            </div>
+        </header>
+
+        <main class="mw8 center ph4-ns ph3">
+            <section class="mv6">
+                <div class="measure-wide">
+                    <p class="f5 lh-copy text-secondary mv0">
+                        Project 2 content goes here. This is a placeholder for the actual content.
+                    </p>
+                </div>
+            </section>
+
+            <section class="mv6">
+                <div class="measure-wide">
+                    <p class="f5 lh-copy text-secondary mv0">
+                        Additional details about Project 2 can be added here.
+                    </p>
+                </div>
+            </section>
+
+            <section class="mv6">
+                <div class="measure-wide">
+                    <blockquote class="bl bw3 b--project pl4 ml0 mt4 mb0">
+                        <p class="f3 fw6 lh-title mv0">Key insights or quotes from Project 2 can be highlighted here.</p>
+                    </blockquote>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-white pv5 mt6">
+            <div class="mw8 center ph4-ns ph3 tc">
+                <p class="f6 text-secondary mb3">Made with ❤️ in Hyderabad, India</p>
+                <div class="mt3">
+                    <a href="https://x.com/Dhaathre" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="https://dribbble.com/saianjan" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            feather.replace();
+        </script>
+    </article>
+</body>
+</html>
