@@ -1,6 +1,6 @@
 body {
     background-color: #F4F4F4;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Inter', sans-serif;
     overflow-y: scroll;
 }
 body::-webkit-scrollbar {
@@ -8,6 +8,7 @@ body::-webkit-scrollbar {
 }
 a{
     color: #0f0e12;
+    font-family: 'Inter', sans-serif;
 }
 /* h1{
     color: #303030;
@@ -48,6 +49,7 @@ figcaption h3{
     text-align: center;
     margin-bottom: 16px;
     font-variant-numeric: tabular-nums;
+    font-family: 'Inter', sans-serif;
 }
 
 

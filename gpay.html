@@ -3,51 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summer internship</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Google Pay + Wallet - Sai Anjan</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="script/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+            --color-blue: #1A73E8;
+            --color-text-primary: #2C3E50;
+            --color-text-secondary: #34495E;
+            --color-background: #F8F9FA;
+        }
+        * {
+            font-family: var(--font-inter) !important;
+        }
+        body { 
+            background-color: var(--color-background);
+            font-family: var(--font-inter) !important;
+        }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-gpay { background-color: var(--color-blue); }
+        .hover-bg-gpay:hover { background-color: var(--color-blue); }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-inter) !important;
+            font-weight: 600 !important;
+            color: var(--color-text-primary);
+        }
+        p, span, a, li, blockquote {
+            font-family: var(--font-inter) !important;
+            font-weight: 400 !important;
+            color: var(--color-text-secondary);
+        }
+        .f1, .f2, .f3, .f4, .f5, .f6, .f7 {
+            font-family: var(--font-inter) !important;
+        }
+        .mw8 { max-width: 64rem; }
+        .sticky-top {
+            position: sticky;
+            top: 4rem;
+        }
+        .media-container img, .media-container video {
+            max-height: 80vh;
+            width: 100%;
+            margin: 2rem auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .media-container img:hover, .media-container video:hover {
+            transform: scale(1.02);
+        }
+        .media-container video {
+            max-width: 100%;
+            height: auto;
+        }
+        @media screen and (max-width: 60em) {
+            .media-container {
+                position: static;
+            }
+            .media-container img, .media-container video {
+                max-height: none;
+                width: 100%;
+            }
+        }
+        .header-bg {
+            background-color: var(--color-blue);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-bg h1, .header-bg p {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        .grid-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            transition: all 0.3s ease;
+        }
+        .grid-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                        rgba(255,255,255,0.15) 0%, 
+                        transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .header-bg:hover .grid-animation::before {
+            opacity: 1;
+        }
+        .section-divider {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin: 3rem 0;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        .popup-content img, .popup-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .close-popup {
+            position: absolute;
+            top: -2rem;
+            right: -2rem;
+            color: white;
+            cursor: pointer;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .media-item {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .media-item:hover {
+            transform: scale(1.02);
+        }
+    </style>
 </head>
+<body class="bg-near-white">
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <button class="close-popup" onclick="closePopup()">×</button>
+            <img id="popupImage" src="" alt="">
+        </div>
+    </div>
 
+    <nav class="w-100 bg-white fixed z-999 shadow-1">
+        <div class="mw8 center ph4-ns ph3 pv3">
+            <a href="index.html" class="link dim black dib">
+                <i data-feather="arrow-left" class="v-mid mr2"></i>
+                <span class="f6 fw5">Back to Projects</span>
+            </a>
+        </div>
+    </nav>
 
+    <article class="pt4">
+        <header class="bg-white pb6 pt5 header-bg">
+            <div class="grid-animation"></div>
+            <div class="mw8 center ph4-ns ph3">
+                <h1 class="f2 f1-ns fw6 lh-title mb3">Google Pay + Wallet</h1>
+                <p class="f4 lh-copy measure-wide mv4">Driving Google Wallet Adoption in India: Addressing Trust and Usability</p>
+            </div>
+        </header>
 
-<body style="background-color: #F4F4F4;">
-  <article class="mw6 pv6 center pa4 pa0-l">
-    <a href="index.html" class="mid-gray hover-black">
-      <svg class="w1" data-icon="chevronLeft" viewBox="0 0 32 32" style="fill:currentcolor">
-        <title>chevronLeft icon</title>
-        <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
-      </svg>
-    </a>
-    <a class="no-underline underline-hover" href="index.html">
-      <p class="fw3 f7 lh-copy gray">
-        FinTech
-      </p>
-      </a>
-    <h3 class="ma0 fw3 f4 near-black tl">Driving Google Wallet Adoption in India: Addressing Trust and Usability</h3>
-    <p class="f6 fw3 mb4 gray">
-      My journey with digital payments took a challenging turn when I recently managed both my and my sister’s savings—around five lakhs—in a single account. Confident in my budgeting skills, I relied on digital payments through UPI apps. But over time, the ease of these transactions led me to overspend, unintentionally depleting the savings. This personal experience highlighted the subtle behavioral shift digital payments can cause, pushing me to explore ways to support users in more mindful spending.
-    </p>
+        <main class="mw8 center ph4-ns ph3">
+            <div class="flex-l flex-wrap">
+                <!-- Text Column -->
+                <div class="w-50-l pr4-l">
+                    <section class="mv6 text-section" id="context">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Context</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            My journey with digital payments took a challenging turn when I recently managed both my and my sister's savings—around five lakhs—in a single account. Confident in my budgeting skills, I relied on digital payments through UPI apps. But over time, the ease of these transactions led me to overspend, unintentionally depleting the savings. This personal experience highlighted the subtle behavioral shift digital payments can cause, pushing me to explore ways to support users in more mindful spending.
+                        </p>
+                    </section>
 
-    <p class="f6 fw3 mb4 gray">
-      In India, UPI has already established a seamless, cashless experience, and many users rely on it for everyday transactions. Introducing a digital wallet alongside UPI is an ambitious move, especially since wallet usage is largely a Western behavior. Indian users tend to prefer direct, bank-linked payments, with many feeling that a separate wallet adds complexity. However, I see an opportunity here to bridge this gap by tailoring Google Wallet for Indian users, focusing on trust, simplicity, and financial education.
-    </p>
+                    <div class="section-divider"></div>
 
-    <p class="f6 fw3 mb4 pb3 bb b--black-10 gray">
-      This case study addresses the unique factors influencing Indian users’ adoption of digital wallets. My goal is to create a solution that doesn’t just provide convenience but actively supports healthier financial behaviors in an emerging digital economy.
-    </p>
-    
-    
-    
-    <script>
-        feather.replace()
-    </script>
-  </article>
+                    <section class="mv6 text-section" id="challenge">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Design Challenge</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            In India, UPI has already established a seamless, cashless experience, and many users rely on it for everyday transactions. Introducing a digital wallet alongside UPI is an ambitious move, especially since wallet usage is largely a Western behavior. Indian users tend to prefer direct, bank-linked payments, with many feeling that a separate wallet adds complexity. However, I see an opportunity here to bridge this gap by tailoring Google Wallet for Indian users, focusing on trust, simplicity, and financial education.
+                        </p>
+                    </section>
+
+                    <div class="section-divider"></div>
+
+                    <section class="mv6 text-section" id="research">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">User Research</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            To understand user behaviors and pain points, I conducted interviews with 15 users across different age groups and financial backgrounds. Key findings included:
+                        </p>
+                        <ul class="f5 lh-copy text-secondary mv4">
+                            <li>Users prefer direct bank transactions over wallets due to trust issues</li>
+                            <li>Many find wallet setup and maintenance cumbersome</li>
+                            <li>Users want better visibility into their spending patterns</li>
+                            <li>Security concerns are a major barrier to wallet adoption</li>
+                        </ul>
+                    </section>
+
+                    <div class="section-divider"></div>
+
+                    <section class="mv6 text-section" id="solution">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Solution</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Based on the research, I proposed several key features for Google Wallet:
+                        </p>
+                        <ul class="f5 lh-copy text-secondary mv4">
+                            <li>Simplified onboarding with bank verification</li>
+                            <li>Smart spending insights and alerts</li>
+                            <li>Budgeting tools integrated with UPI</li>
+                            <li>Enhanced security features with biometric authentication</li>
+                        </ul>
+                        <blockquote class="bl bw3 b--gpay pl4 ml0 mt4 mb0">
+                            <p class="f3 fw6 lh-title mv0">This case study addresses the unique factors influencing Indian users' adoption of digital wallets. My goal is to create a solution that doesn't just provide convenience but actively supports healthier financial behaviors in an emerging digital economy.</p>
+                        </blockquote>
+                    </section>
+                </div>
+
+                <!-- Media Column -->
+                <div class="w-50-l pl4-l">
+                    <div class="media-container">
+                        <img src="Images/gpay/onboarding.png" class="db br3" alt="Onboarding Flow" onclick="openPopup(this.src)">
+                        <img src="Images/gpay/spending.png" class="db br3" alt="Spending Insights" onclick="openPopup(this.src)">
+                        <img src="Images/gpay/budget.png" class="db br3" alt="Budgeting Tools" onclick="openPopup(this.src)">
+                        <img src="Images/gpay/security.png" class="db br3" alt="Security Features" onclick="openPopup(this.src)">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-white pv5 mt6">
+            <div class="mw8 center ph4-ns ph3 tc">
+                <p class="f6 text-secondary mb3">Made with ❤️ in Hyderabad, India</p>
+                <div class="mt3">
+                    <a href="https://x.com/Dhaathre" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="https://dribbble.com/saianjan" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            feather.replace();
+            
+            // Grid animation
+            document.querySelector('.header-bg').addEventListener('mousemove', (e) => {
+                const header = e.currentTarget;
+                const rect = header.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                header.style.setProperty('--mouse-x', `${x}%`);
+                header.style.setProperty('--mouse-y', `${y}%`);
+            });
+
+            // Popup functionality
+            function openPopup(src) {
+                const overlay = document.getElementById('popupOverlay');
+                const popupImage = document.getElementById('popupImage');
+                popupImage.src = src;
+                overlay.style.display = 'flex';
+            }
+
+            function closePopup() {
+                const overlay = document.getElementById('popupOverlay');
+                overlay.style.display = 'none';
+            }
+
+            // Close popup when clicking outside the image
+            document.getElementById('popupOverlay').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) {
+                    closePopup();
+                }
+            });
+
+            // Close popup with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+        </script>
+    </article>
 </body>
 </html>

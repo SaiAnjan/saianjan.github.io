@@ -3,202 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summer internship</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Evaahan - Sai Anjan</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="script/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+            --color-teal: #008080;
+            --color-text-primary: #2C3E50;
+            --color-text-secondary: #34495E;
+            --color-background: #F8F9FA;
+        }
+        * {
+            font-family: var(--font-inter) !important;
+        }
+        body { 
+            background-color: var(--color-background);
+            font-family: var(--font-inter) !important;
+        }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-evaahan { background-color: var(--color-teal); }
+        .hover-bg-evaahan:hover { background-color: var(--color-teal); }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-inter) !important;
+            font-weight: 600 !important;
+            color: var(--color-text-primary);
+        }
+        p, span, a, li, blockquote {
+            font-family: var(--font-inter) !important;
+            font-weight: 400 !important;
+            color: var(--color-text-secondary);
+        }
+        .f1, .f2, .f3, .f4, .f5, .f6, .f7 {
+            font-family: var(--font-inter) !important;
+        }
+        .mw8 { max-width: 64rem; }
+        .sticky-top {
+            position: sticky;
+            top: 4rem;
+        }
+        .media-container img, .media-container video {
+            max-height: 80vh;
+            width: 100%;
+            margin: 2rem auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .media-container img:hover, .media-container video:hover {
+            transform: scale(1.02);
+        }
+        .media-container video {
+            max-width: 100%;
+            height: auto;
+        }
+        @media screen and (max-width: 60em) {
+            .media-container {
+                position: static;
+            }
+            .media-container img, .media-container video {
+                max-height: none;
+                width: 100%;
+            }
+        }
+        .header-bg {
+            background-color: var(--color-teal);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-bg h1, .header-bg p {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        .grid-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            transition: all 0.3s ease;
+        }
+        .grid-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                        rgba(255,255,255,0.15) 0%, 
+                        transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .header-bg:hover .grid-animation::before {
+            opacity: 1;
+        }
+        .section-divider {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin: 3rem 0;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        .popup-content img, .popup-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .close-popup {
+            position: absolute;
+            top: -2rem;
+            right: -2rem;
+            color: white;
+            cursor: pointer;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .media-item {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .media-item:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Remove dynamic header styles */
+        .nav-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .nav-back {
+            display: flex;
+            align-items: center;
+            color: black;
+            text-decoration: none;
+        }
+        
+        .nav-back i {
+            margin-right: 0.5rem;
+        }
+        
+        .nav-back span {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+    </style>
 </head>
+<body class="bg-near-white">
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <button class="close-popup" onclick="closePopup()">×</button>
+            <img id="popupImage" src="" alt="">
+        </div>
+    </div>
 
+    <nav class="w-100 bg-white fixed z-999 shadow-1">
+        <div class="mw8 center ph4-ns ph3 pv3">
+            <a href="index.html" class="link dim black dib nav-back">
+                <i data-feather="arrow-left" class="v-mid"></i>
+                <span class="f6 fw5">Back to Projects</span>
+            </a>
+        </div>
+    </nav>
 
+    <article class="pt4">
+        <header class="bg-white pb6 pt5 header-bg">
+            <div class="grid-animation"></div>
+            <div class="mw8 center ph4-ns ph3">
+                <h1 class="f2 f1-ns fw6 lh-title mb3">e-Vaahan</h1>
+                <p class="f4 lh-copy measure-wide mv4">A greener way of ride-sharing inside university campus.</p>
+            </div>
+        </header>
 
-<body style="background-color: #F4F4F4;">
-  <article class="mw6 pv6 center">
-    <a href="index.html" class="mid-gray hover-black">
-      <svg class="w1" data-icon="chevronLeft" viewBox="0 0 32 32" style="fill:currentcolor">
-        <title>chevronLeft icon</title>
-        <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
-      </svg>
-    </a>
-    <a class="no-underline underline-hover" href="index.html">
-      <p class="fw3 f7 lh-copy gray">
-        Product Design
-      </p>
-      </a>
-    <h3 class="ma0 fw3 f4 near-black tl">e-Vaahan</h3>
-    <p class="f6 fw3 mb4 pb3 bb b--black-10 gray">
-      A greener way of ride-sharing inside university campus.
-    </p>
-    
-    
-    <!-- content section -->
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/main.png);"></div>
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      Context
-    </h3>
-    <p class="f6 fw3 gray mv4">
-      IIT Bombay has an area of more than 2.396 gross square feet. The campus is divided into clusters of 
-      buildings. All department annexes are connected by a corridor named Infinite Corridor. Beyond the Convocation Hall lie 
-      16 hostels. Apart from the infinite corridor all the facilities and departments are also connected by streets. Commuting 
-      on the streets of IIT Bombay happens by foot and by cycling. The campus is restricted for three and four wheelers considering 
-      the environment of the campus. Still, you have the liberty of ran over by vehicles than the leopards as we regularly spot 
-      fast-moving vehicles. A walk through the 1.8km long main central street which connects all the streets takes around 25 min.
-    </p>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/map.jpg);"></div>
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      Intro
-    </h3>
-    <p class="f6 fw3 gray mv4">
-      A design challenge was given to order, to structure, and to remember as part of the Cognitive dimension 
-      when Designing for Interactivity. Guided by Prof. Ravi Poovaiah, we started off with a task of creating a digital campus. 
-      To identify the pain areas inside the campus tasks involved has been listed out. These tasks vary from student activities 
-      to academic and transportation and productivity. After the restriction of vehicles inside the campus, auto rickshaws have 
-      become the primary commute inside the campus. Ordering and structuring the transportation around us makes it easier to 
-      commute and travel. Increases in the use of auto rickshaw for commuting have meant that transportation has become costly 
-      and inaccessible every day for a broad range of people.
-    </p>
-    <p class="f6 fw3 gray mv4">
-    Currently, IIT Bombay has a total of 14 academic departments, six centres, one school, and three interdisciplinary programmes. 
-    The university is a home for 3600 Undergraduates and 2000 Postgraduates. Provided with the transportation these students 
-    regularly are commuting with their own personal bikes. Auto rickshaws play a short role in transportation with costly meters 
-    and leave most of the commuters with more waiting time. With the tightly packed and early day starting academic schedules 
-    students who prefer a pedestrian commuting need a safer and a faster mode of travel. So the UG and PG students have been 
-    identified as the commuters where a shared bike solution which is economical and environment-friendly is needed.
-    </p>
-    <p class="f6 fw3 gray mv4">
-    For the past few months, PEDL by Zoomcar and CYCLO by Yulu has been installed inside the campus. Both PEDL and YULU bikes provide 
-    a ride-sharing inside the campus. These services allow the students to commute using bikes which are available at several bike 
-    zones inside the campus. The zones are available to the users through a mobile application through which you can view the 
-    availability of bikes and reach the zone and start your journey. To understand these service we started off by using the 
-    service and following are the observations made.
-    </p>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/pedl_cyclo.jpg);"></div>
+        <main class="mw8 center ph4-ns ph3">
+            <div class="flex-l flex-wrap">
+                <!-- Text Column -->
+                <div class="w-50-l pr4-l">
+                    <section class="mv6 text-section" id="context">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Context</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            IIT Bombay spans over 2.396 million square feet, comprising clusters of academic and residential buildings 
+                            interconnected by the Infinite Corridor and various streets. While the campus promotes pedestrian and bicycle 
+                            movement, restrictions on motorized vehicles have led to an increased reliance on auto-rickshaws. This has 
+                            resulted in higher commuting costs and safety concerns due to fast-moving vehicles. Walking the 1.8 km central 
+                            street takes approximately 25 minutes, highlighting the need for a more efficient transportation solution.
+                        </p>
+                    </section>
 
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      CYCLO by Yulu
-    </h3>
-    <p class="f6 fw3 gray mv4">
-      1. Requires an active Bluetooth connectivity between the device and the bike.<br>
-      2. Easily accessible by scanning the QR code available on the bike and using the 4-Digit PIN thrown by the app to unlock.<br>
-      3. The Ride can be paused only at the specified YULU zones.<br>
-      4. While pausing and ending the Ride the app always throws an error because of either Network connectivity or Bluetooth connectivity resulting in meaningless pauses and resumes.<br>
-      5. Bikes take a big buffer time to unlock after resuming the ride.<br>
-      6. Either Bike/Mobile Application do not recognise the YULU Zones and requires the app to be closed and re-opened.<br>
-    </p>
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      PEDL by Zoomcar
-    </h3>
-    <p class="f6 fw3 gray mv4">
-      1. Provides a better connectivity than CYCLO but still resides the same problems.<br>
-      2. Inaccessible to IOS Users resulting in restricting to android users.<br>
-    </p>
+                    <div class="section-divider"></div>
 
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      Research & Design intervention
-    </h3>
-    <p class="f6 fw3 gray mv4">
-      We went on with a primary research of understanding bike-sharing services in New York city, Hyderabad Metro, 
-      MIT University and Red Bikes. IIT Bombay campus has employed a shuttle service inside the campus called "Tum Tum". It was 
-      available until a couple of years ago. Reasons for terminating this service has been identified as unavailability of drivers 
-      and their maintenance. Students at the university remember the service as the widely used service as it commutes over all the 
-      streets and it was crowded since the quantity of the vehicles were very less. Students were asked to pay an amount of 1000 bucks 
-      to avail this service. After discussing within the team we realised that the part of the users who use mobile to access the 
-      bike-sharing service are unhappy about it which requires a complete engagement with the mobile application.
-    </p>
-    <p class="f6 fw3 gray mv4">
-      A huge chunk of users is students travelling from their hostel to college and back spending just above 60 minutes/day on average. 
-      After interviewing a lot of these students, we found that most hire autos or ride their own bikes to reach early as in order to 
-      attend the lecture on time.
-    </p>
-    <p class="f6 fw3 gray mv4">
-      Knowing this behaviour of long walks and late arrivals, we sensed an opportunity that we could do something more. We could actually 
-      provide an easy and convenient bike ride which can be accessed throughout the day from their hostels or departments.
-    </p>
-    <p class="f6 fw3 gray mv4">
-      Drawing inspiration from the CYCLO & PEDL Services, we started thinking of a similar ride-sharing service. With the help of the 
-      device attached to the bike, we can isolate the user from the mobile application, and almost put them in their enjoyable riding 
-      experience with a simple interface to use from.
-    </p>
-    <p class="f6 fw3 gray mv4">
-      A Big reference for us has been the SmartBike service used in Hyderabad, Bhopal and Bangalore which employed a display on the 
-      back of the carriage where the users enter the PIN to unlock the bike.
-    </p>
-    <p class="f6 fw3 gray mv2">
-      The design of our interface module started off with a replaceable module system on the back of the carriage. This module contains 
-      three parts which serve the purpose of Accessibility, Feedback and Interactivity. After eliminating the mobile application in the 
-      journey of our service an Identity card is identified as the common and most important Smart card throughout the daily student life. 
-      This Card is a Radio Frequency ID card which provides access to all student's particular facilities. These cards are connected to the
-      LDAP Data of the University. Each student has a unique Identity connected to the database which connects to their digital profile.
-    </p>
+                    <section class="mv6 text-section" id="design-challenge">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Design Challenge</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Under the guidance of Prof. Ravi Poovaiah, the objective was to create a digital campus by identifying and 
+                            addressing pain points related to student activities, academics, transportation, and productivity. The focus 
+                            was on structuring and ordering campus transportation to enhance commuting experiences.
+                        </p>
+                    </section>
 
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/byk.png);"></div>
-    <p class="f6 fw3 gray mv2">
-      So we decided on reusing the RF Identity card as the entry point of access for the service. So we included an 
-      RF Identity card reader which is connected to the University database and it identifies the identity of the user. The visual 
-      feedback of the availability of the bike is provided visually through an LED. The interface of the module allows the user to provide 
-      the required actions and lets him/her interact with the system.
-    </p>
+                    <div class="section-divider"></div>
 
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/close_up.png);"></div>
-    <p class="f6 fw3 gray mv2">
-      Let's watch a scenario of a student on the campus who is about to miss an early class and chooses a faster and eco way to travel:
-    </p>
+                    <section class="mv6 text-section" id="user-research">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">User Research and Insights</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            The campus hosts 14 academic departments, six centers, one school, and three interdisciplinary programs, 
+                            accommodating approximately 5,600 students. Despite the availability of personal bicycles and auto-rickshaws, 
+                            the latter's high costs and limited availability during peak hours posed challenges.
+                        </p>
+                        
+                        <h4 class="fw5 f6 pt2 lh-copy text-primary">Existing Bike-Sharing Services</h4>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Services like PEDL by Zoomcar and CYCLO by Yulu were introduced on campus, offering bike-sharing options 
+                            through mobile applications. However, user experiences revealed several issues:
+                        </p>
+                        
+                        <h5 class="fw5 f6 pt2 lh-copy text-primary">CYCLO by Yulu</h5>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            1. Dependence on active Bluetooth connectivity<br>
+                            2. Frequent errors during pausing and ending rides<br>
+                            3. Unrecognized bike zones<br>
+                            4. Long buffer time for unlocking after resuming rides<br>
+                        </p>
 
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/ia.png);"></div>
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      Low-Fidelity Wireframes:
-    </h3>
-    <p class="f6 fw3 gray mv4">
-      e-Vaahan puts the mobile in your pocket letting you enjoy the ride on the green streets of the campus making it truly your own ride.
-      Screen Interface on the module requires an easily accessible and faster actionable console. Three actions helped us determine what primarily goes on the screen:
-    </p>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/l1.png);"></div>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/l2.png);"></div>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/l3.png);"></div>
-    <p class="f6 fw3 gray mv4">
-      1. Starting your ride by unlocking the bike.<br>
-      2. Pausing your ride at any point of your journey and resuming it.<br>
-      3. Ending the ride without any hassle.<br>
-    </p>
-    <p class="f6 fw3 gray mv4">
-      We narrowed down the number of screens and actions by accessing the LDAP database of the students to identify 
-      the user when they use their ID card to scan and unlock the bike and just letting them choose between a primary and secondary 
-      action each time they perform an activity. As explained above the following are the initial explorations of the UI Screens of the system:
-    </p>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/scr1.jpg);"></div>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/scr2.jpg);"></div>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/scr3.jpg);"></div>
-    <p class="f6 fw3 gray mv4">
-      1. Users enjoy their ride rather worrying about keeping their mobile screen active all the time.<br>
-      2. Users actively look forward while riding as the Interface needs their focus only when paused or Engaging/Disengaging.<br>
-      3. They are happy about resuing their Identity card for unlocking the bike as it doesn't count in with the number of accounts they keep creating on their mobiles.<br>
-      4. Users were not satisfied as there were no playful elements present in the interface.<br>
-    </p>
-    <p class="f6 fw3 gray mv4">
-      We went on redesigning the visual part of the screens by creating illustration and empty states which are youthful 
-      and pleasing. The writing style has been aligned with the language of the students to make them understand quicker. 
-      The later designs of the interface have been redesigned and made to look like this:
-    </p>
-    <video src="Images/evaahan/video.mp4" controls class="mw6 center"></video>
-    <h3 class="fw5 f6 pt2 lh-copy near-black">
-      A physical prototype I made:
-    </h3>
-    <div class="br3 mv4 pv7 cover bg-center" style="background: url(Images/evaahan/exhibition.jpg);"></div>
+                        <h5 class="fw5 f6 pt2 lh-copy text-primary">PEDL by Zoomcar</h5>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            1. Better connectivity than CYCLO but similar issues<br>
+                            2. Limited to Android users, excluding iOS users<br>
+                        </p>
 
-    <!-- content section ends -->
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Many students spend over 60 minutes daily commuting between hostels and academic buildings. To save time, 
+                            they often resort to hiring auto-rickshaws or using personal bikes, indicating a demand for a faster, 
+                            cost-effective, and eco-friendly commuting alternative.
+                        </p>
+                    </section>
 
-    <!-- <blockquote class="f4-ns georgia lh-copy bb bt b--black-10">
-      <p class="fw3 lh-copy gray lh-title-ns">"The punches of Claude Garamond, cut around 1530 in Paris, are simply unsurpassed in their clarity, readability and beauty."
-      </p>
-    </blockquote> -->
-    <script>
-        feather.replace()
-    </script>
-  </article>
+                    <div class="section-divider"></div>
+
+                    <section class="mv6 text-section" id="design-intervention">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Design Intervention</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Drawing inspiration from global bike-sharing models and considering the limitations of existing services, 
+                            the team proposed e-Vaahan—a campus-exclusive ride-sharing system with the following features:
+                        </p>
+                        
+                        <h4 class="fw5 f6 pt2 lh-copy text-primary">RFID-Based Access</h4>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Utilizing students' existing RFID identity cards to unlock bikes, eliminating the need for constant mobile 
+                            application engagement.
+                        </p>
+
+                        <h4 class="fw5 f6 pt2 lh-copy text-primary">Integrated Interface Module</h4>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            A device attached to the bike comprising:
+                        </p>
+                        <ul class="f5 lh-copy text-secondary mv4">
+                            <li>RFID Card Reader: For user authentication and access</li>
+                            <li>LED Indicators: Providing visual feedback on bike availability and status</li>
+                            <li>Interactive Screen: Facilitating actions such as starting, pausing, and ending rides</li>
+                        </ul>
+                    </section>
+
+                    <div class="section-divider"></div>
+
+                    <section class="mv6 text-section" id="prototyping">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Prototyping and User Feedback</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Low-fidelity wireframes were developed to visualize the user interface and interactions.
+                        </p>
+                        
+                        <h4 class="fw5 f6 pt2 lh-copy text-primary">Key User Feedback</h4>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Positive Aspects:
+                        </p>
+                        <ul class="f5 lh-copy text-secondary mv4">
+                            <li>Appreciation for minimizing mobile dependency</li>
+                            <li>Leveraging existing ID cards for access</li>
+                        </ul>
+                        
+                        <p class="f5 lh-copy text-secondary mv4">
+                            Areas for Improvement:
+                        </p>
+                        <ul class="f5 lh-copy text-secondary mv4">
+                            <li>Desire for more engaging and playful interface elements</li>
+                        </ul>
+
+                        <p class="f5 lh-copy text-secondary mv4">
+                            In response, the interface was redesigned to incorporate youthful illustrations and language aligned with 
+                            the student community, enhancing user engagement.
+                        </p>
+                    </section>
+
+                    <div class="section-divider"></div>
+
+                    <section class="mv6 text-section" id="conclusion">
+                        <h3 class="fw5 f6 pt2 lh-copy text-primary">Conclusion</h3>
+                        <p class="f5 lh-copy text-secondary mv4">
+                            e-Vaahan presents a tailored solution to IIT Bombay's campus commuting challenges by offering an economical, 
+                            eco-friendly, and user-centric bike-sharing system. By integrating RFID technology and focusing on intuitive 
+                            design, the project aims to enhance the daily commuting experience of students, promoting sustainability and 
+                            efficiency.
+                        </p>
+                    </section>
+                </div>
+
+                <!-- Media Column -->
+                <div class="w-50-l pl4-l">
+                    <div class="media-container">
+                        <img src="Images/evaahan/map.jpg" class="db br3" alt="Campus Map" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/pedl_cyclo.jpg" class="db br3" alt="PEDL and CYCLO Bikes" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/byk.png" class="db br3" alt="Bike Design" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/close_up.png" class="db br3" alt="Close-up of Interface" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/ia.png" class="db br3" alt="User Scenario" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/l1.png" class="db br3" alt="Wireframe 1" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/l2.png" class="db br3" alt="Wireframe 2" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/l3.png" class="db br3" alt="Wireframe 3" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/scr1.jpg" class="db br3" alt="Screen 1" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/scr2.jpg" class="db br3" alt="Screen 2" onclick="openPopup(this.src)">
+                        <img src="Images/evaahan/scr3.jpg" class="db br3" alt="Screen 3" onclick="openPopup(this.src)">
+                        <video src="Images/evaahan/video.mp4" controls class="db br3 w-100"></video>
+                        <img src="Images/evaahan/exhibition.jpg" class="db br3" alt="Physical Prototype" onclick="openPopup(this.src)">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-white pv5 mt6">
+            <div class="mw8 center ph4-ns ph3 tc">
+                <p class="f6 text-secondary mb3">Made with ❤️ in Hyderabad, India</p>
+                <div class="mt3">
+                    <a href="https://x.com/Dhaathre" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="https://dribbble.com/saianjan" class="link dim gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10">
+                        <i data-feather="dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            feather.replace();
+            
+            // Grid animation
+            document.querySelector('.header-bg').addEventListener('mousemove', (e) => {
+                const header = e.currentTarget;
+                const rect = header.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                header.style.setProperty('--mouse-x', `${x}%`);
+                header.style.setProperty('--mouse-y', `${y}%`);
+            });
+
+            // Popup functionality
+            function openPopup(src) {
+                const overlay = document.getElementById('popupOverlay');
+                const popupImage = document.getElementById('popupImage');
+                popupImage.src = src;
+                overlay.style.display = 'flex';
+            }
+
+            function closePopup() {
+                const overlay = document.getElementById('popupOverlay');
+                overlay.style.display = 'none';
+            }
+
+            // Close popup when clicking outside the image
+            document.getElementById('popupOverlay').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) {
+                    closePopup();
+                }
+            });
+
+            // Close popup with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+        </script>
+    </article>
 </body>
 </html>

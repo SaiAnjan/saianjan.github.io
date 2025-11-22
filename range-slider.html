@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Range Slider - Sai Anjan</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="script/feather.min.js"></script>
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+            --color-primary: #0d9488;
+            --color-error: #dc2626;
+            --color-success: #059669;
+            --color-text: #1f2937;
+            --color-text-secondary: #6b7280;
+            --color-background: #f8fafc;
+            --color-border: #e2e8f0;
+            --slider-height: 4px;
+            --thumb-size: 20px;
+        }
+        * {
+            font-family: var(--font-inter) !important;
+        }
+        body { 
+            background-color: var(--color-background);
+            color: var(--color-text);
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0;
+            padding: 2rem 0;
+            height: 60px;
+        }
+        .slider-track {
+            position: absolute;
+            width: 100%;
+            height: var(--slider-height);
+            background: var(--color-border);
+            border-radius: var(--slider-height);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .slider-range {
+            position: absolute;
+            height: var(--slider-height);
+            background: var(--color-primary);
+            border-radius: var(--slider-height);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .slider-thumb {
+            position: absolute;
+            width: var(--thumb-size);
+            height: var(--thumb-size);
+            background: white;
+            border: 2px solid var(--color-primary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+        .slider-thumb:hover {
+            box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .slider-thumb.active {
+            box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.2);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+        .tooltip {
+            position: absolute;
+            background: var(--color-text);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            top: -2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            white-space: nowrap;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.125rem;
+        }
+        .tooltip .label {
+            font-size: 0.625rem;
+            opacity: 0.8;
+        }
+        .tooltip.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 4px;
+            border-style: solid;
+            border-color: var(--color-text) transparent transparent transparent;
+        }
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0;
+        }
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+            min-width: 0;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-right: 3.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            color: var(--color-text);
+            background: white;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            font-weight: 500;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+        .input-label {
+            position: absolute;
+            top: -0.75rem;
+            left: 0.75rem;
+            background: white;
+            padding: 0 0.375rem;
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+        .input-unit {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            pointer-events: none;
+            font-weight: 500;
+        }
+        .help-text {
+            position: absolute;
+            bottom: -1.5rem;
+            left: 0;
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+        .error-message {
+            position: absolute;
+            bottom: -1.5rem;
+            left: 0;
+            font-size: 0.75rem;
+            color: var(--color-error);
+            display: none;
+            font-weight: 500;
+        }
+        .input-wrapper.error .input-field {
+            border-color: var(--color-error);
+        }
+        .input-wrapper.error .error-message {
+            display: block;
+        }
+        .input-wrapper.error .help-text {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="w-100 bg-white fixed z-999 shadow-1">
+        <div class="mw8 center ph4-ns ph3">
+            <a href="index.html" class="link dim black dib">
+                <i data-feather="arrow-left" class="v-mid mr2"></i>
+                <span class="f6 fw5">Back to Projects</span>
+            </a>
+        </div>
+    </nav>
+
+    <article class="pt5">
+        <header class="bg-white pb6 pt5">
+            <div class="mw8 center ph4-ns ph3">
+                <h1 class="f2 f1-ns fw6 lh-title mb3">Dual Range Slider</h1>
+                <p class="f4 lh-copy measure-wide gray mv4">
+                    A responsive dual-thumb range slider with tooltips and value synchronization.
+                </p>
+            </div>
+        </header>
+
+        <main class="mw8 center ph4-ns ph3">
+            <section class="mv4">
+                <div class="slider-container">
+                    <div class="slider-track"></div>
+                    <div class="slider-range"></div>
+                    <div class="slider-thumb" id="average-thumb">
+                        <div class="tooltip" id="average-tooltip">
+                            <span class="label">Average</span>
+                            <span>0.00</span>
+                        </div>
+                    </div>
+                    <div class="slider-thumb" id="endpoint-thumb">
+                        <div class="tooltip" id="endpoint-tooltip">
+                            <span class="label">End Point</span>
+                            <span>0.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container mt4">
+                    <div class="input-wrapper">
+                        <label class="input-label">Average</label>
+                        <input type="number" class="input-field" id="average-input" step="0.01" min="0" max="4600">
+                        <span class="input-unit">meq/L</span>
+                        <div class="help-text">Range: 0.00-4600.00</div>
+                        <div class="error-message">Value must be less than End Point</div>
+                    </div>
+                    <div class="input-wrapper">
+                        <label class="input-label">End Point</label>
+                        <input type="number" class="input-field" id="endpoint-input" step="0.01" min="0" max="4600">
+                        <span class="input-unit">meq/L</span>
+                        <div class="help-text">Range: 0.00-4600.00</div>
+                        <div class="error-message">Value must be greater than Average</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </article>
+
+    <script>
+        feather.replace();
+
+        const averageThumb = document.getElementById('average-thumb');
+        const endpointThumb = document.getElementById('endpoint-thumb');
+        const averageTooltip = document.getElementById('average-tooltip');
+        const endpointTooltip = document.getElementById('endpoint-tooltip');
+        const averageInput = document.getElementById('average-input');
+        const endpointInput = document.getElementById('endpoint-input');
+        const sliderRange = document.querySelector('.slider-range');
+        const sliderContainer = document.querySelector('.slider-container');
+        const containerWidth = sliderContainer.offsetWidth;
+        const thumbSize = 20;
+        const minValue = 0;
+        const maxValue = 4600;
+        const step = 0.01;
+
+        let average = 0.079;
+        let endpoint = 0.7;
+        let activeThumb = null;
+
+        function updateValues() {
+            const averagePercent = (average / maxValue) * 100;
+            const endpointPercent = (endpoint / maxValue) * 100;
+
+            averageThumb.style.left = `${averagePercent}%`;
+            endpointThumb.style.left = `${endpointPercent}%`;
+            sliderRange.style.left = `${averagePercent}%`;
+            sliderRange.style.width = `${endpointPercent - averagePercent}%`;
+
+            averageTooltip.querySelector('span:last-child').textContent = average.toFixed(2);
+            endpointTooltip.querySelector('span:last-child').textContent = endpoint.toFixed(2);
+            averageInput.value = average.toFixed(2);
+            endpointInput.value = endpoint.toFixed(2);
+
+            // Only show error states if values are invalid
+            if (average > 0 || endpoint > 0) {
+                averageInput.parentElement.classList.toggle('error', average >= endpoint);
+                endpointInput.parentElement.classList.toggle('error', endpoint <= average);
+            }
+        }
+
+        function getValueFromPosition(position) {
+            const percent = (position / containerWidth) * 100;
+            const value = (percent / 100) * maxValue;
+            return Math.round(value / step) * step;
+        }
+
+        function handleMouseDown(e) {
+            activeThumb = e.target;
+            activeThumb.classList.add('active');
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        function handleMouseMove(e) {
+            if (!activeThumb) return;
+
+            const rect = sliderContainer.getBoundingClientRect();
+            let position = e.clientX - rect.left;
+            position = Math.max(0, Math.min(position, containerWidth));
+
+            const value = getValueFromPosition(position);
+
+            if (activeThumb === averageThumb) {
+                if (value < endpoint) {
+                    average = value;
+                }
+            } else {
+                if (value > average) {
+                    endpoint = value;
+                }
+            }
+
+            updateValues();
+        }
+
+        function handleMouseUp() {
+            if (activeThumb) {
+                activeThumb.classList.remove('active');
+                activeThumb = null;
+            }
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        }
+
+        function showTooltip(tooltip) {
+            tooltip.classList.add('visible');
+        }
+
+        function hideTooltip(tooltip) {
+            tooltip.classList.remove('visible');
+        }
+
+        function handleInputChange(e) {
+            const value = parseFloat(e.target.value);
+            if (isNaN(value)) return;
+
+            if (e.target === averageInput) {
+                if (value < endpoint) {
+                    average = value;
+                }
+            } else {
+                if (value > average) {
+                    endpoint = value;
+                }
+            }
+
+            updateValues();
+        }
+
+        averageThumb.addEventListener('mousedown', handleMouseDown);
+        endpointThumb.addEventListener('mousedown', handleMouseDown);
+
+        averageThumb.addEventListener('mouseenter', () => showTooltip(averageTooltip));
+        averageThumb.addEventListener('mouseleave', () => hideTooltip(averageTooltip));
+        endpointThumb.addEventListener('mouseenter', () => showTooltip(endpointTooltip));
+        endpointThumb.addEventListener('mouseleave', () => hideTooltip(endpointTooltip));
+
+        averageInput.addEventListener('input', handleInputChange);
+        endpointInput.addEventListener('input', handleInputChange);
+
+        // Initialize values
+        updateValues();
+    </script>
+</body>
+</html> 
